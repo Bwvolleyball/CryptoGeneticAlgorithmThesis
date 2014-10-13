@@ -3,7 +3,7 @@ package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.domain;
 /**
  * Created by BrandonWard on 9/30/2014.
  */
-public class Ciphertext {
+public class Ciphertext extends DomainAbs {
 
     private String ciphertext;
 

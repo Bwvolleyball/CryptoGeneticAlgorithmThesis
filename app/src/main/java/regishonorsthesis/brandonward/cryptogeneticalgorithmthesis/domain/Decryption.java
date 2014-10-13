@@ -3,7 +3,7 @@ package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.domain;
 /**
  * Created by BrandonWard on 9/25/2014.
  */
-public class Decryption {
+public class Decryption extends DomainAbs {
     private String decryption; //decryption string, calculated from Gene
     private Gene gene;//each decryption needs a gene
     private double fitness; //fitness double, calculated from decryption

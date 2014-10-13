@@ -1,5 +1,6 @@
 package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -8,17 +9,17 @@ import java.util.Set;
 /**
  * Created by BrandonWard on 9/25/2014.
  */
-public class Gene {
-    private Set<Character> gene;
+public class Gene extends DomainAbs {
+    private List<Character> gene;
 
     public Gene() {
-        gene = new LinkedHashSet<Character>(26);
+        gene = new ArrayList<Character>(26);
     }
 
     public Gene(char[] genes) {
-        gene = new LinkedHashSet<Character>(26);
+        gene = new ArrayList<Character>(26);
         for (int i = 0; i < 26; i++) {
-            gene.add(genes[i]);
+            gene.add(genes[(char) i]);
         }
     }
 
@@ -26,11 +27,11 @@ public class Gene {
         this.gene.addAll(gene);
     }
 
-    public Set getGene() {
+    public List getGene() {
         return gene;
     }
 
-    public void setGene(Set gene) {
+    public void setGene(List gene) {
         this.gene = gene;
     }
 }
