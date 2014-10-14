@@ -38,7 +38,37 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
     }
 
     public void nextDecryption() {
+        double prevFitness = decryption.getFitness();//Save previous fitness and decryption
+        Decryption prevDecrypt = decryption;//Test after changing decryption to see if new iteration should be kept
 
+    }
+
+    public void calculateFitness() {
+        decryption.setFitness(calculateSingleFit()
+                + calculateDigraphFit()
+                + calculateTrigraphFit()
+                + calculateStartFit()
+                + calculateEndFit());
+    }
+
+    private double calculateSingleFit() {
+        return 0;
+    }
+
+    private double calculateDigraphFit() {
+        return 0;
+    }
+
+    private double calculateTrigraphFit() {
+        return 0;
+    }
+
+    private double calculateStartFit() {
+        return 0;
+    }
+
+    private double calculateEndFit() {
+        return 0;
     }
 
 }
