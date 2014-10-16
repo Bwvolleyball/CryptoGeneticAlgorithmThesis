@@ -14,14 +14,16 @@ import android.os.Build;
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
 
 public class MainActivity extends Activity {
+    //TODO: Create simple Encryption Mechanism that will shuffle a gene and allow for creating an encrypted message to be put back into decryption machine
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, getFragmentManager().findFragmentById(R.layout.fragment_main))//On create, launch the app with the main fragment
                     .commit();
         }
     }
