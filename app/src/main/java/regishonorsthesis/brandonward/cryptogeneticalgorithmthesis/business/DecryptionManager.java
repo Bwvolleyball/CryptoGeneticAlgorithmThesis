@@ -106,18 +106,25 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         for (int i = 0; i < frequencyCount.length; i++) {
             tripleFit += frequencyCount[i] * commonTrigraphsFrequencies[i];
         }
-        //TODO: Calculate Trigraph Fitness
-        return 0;
+        return tripleFit;
     }
 
     private double calculateStartFit() {
-        //TODO: Calculate Start Fitness
-        return 0;
+        double[] frequencyCount = countStartLetter();
+        double startFit = 0;
+        for (int i = 0; i < frequencyCount.length; i++) {
+            startFit += frequencyCount[i] * commonWordStartsFrequencies[i];
+        }
+        return startFit;
     }
 
     private double calculateEndFit() {
-        //TODO: Calculate End Fitness
-        return 0;
+        double[] frequencyCount = countEndLetter();
+        double endFit = 0;
+        for (int i = 0; i < frequencyCount.length; i++) {
+            endFit += frequencyCount[i] * commonWordEndsFrequencies[i];
+        }
+        return endFit;
     }
 
     private double[] countSingleLetter() {
@@ -154,6 +161,34 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
             int k = 0;
             for (int j = 0; j < splitCipher.length; j++) {
                 if (commonTrigraphs[i].equals(String.valueOf(splitCipher, j, 3))) {
+                    k++;
+                }
+            }
+            frequencyCount[i] = k;
+        }
+        return frequencyCount;
+    }
+
+    private double[] countStartLetter() {
+        double[] frequencyCount = new double[commonWordStarts.length];
+        for (int i = 0; i < frequencyCount.length; i++) {
+            int k = 0;
+            for (int j = 0; j < splitCipher.length; j++) {
+                if (splitCipher[j] == ' ' && commonWordStarts[i].equals(splitCipher[j + 1])) {
+                    k++;
+                }
+            }
+            frequencyCount[i] = k;
+        }
+        return frequencyCount;
+    }
+
+    private double[] countEndLetter() {
+        double[] frequencyCount = new double[commonWordEnds.length];
+        for (int i = 0; i < frequencyCount.length; i++) {
+            int k = 0;
+            for (int j = 0; j < splitCipher.length; j++) {
+                if (splitCipher[j] == ' ' && commonWordEnds[i].equals(splitCipher[j + 1])) {
                     k++;
                 }
             }
