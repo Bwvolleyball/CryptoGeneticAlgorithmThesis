@@ -29,7 +29,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Main Menu"
         android:id="@+id/mainMenuTitle"
-        android:layout_weight=".001" />
+        android:layout_weight=".001"
+        android:paddingLeft="15dp" />
 
     <Space
         android:layout_width="match_parent"
