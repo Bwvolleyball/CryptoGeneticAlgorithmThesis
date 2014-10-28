@@ -3,6 +3,7 @@ package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.presentation;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,7 +14,7 @@ import android.os.Build;
 
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CreateEncryption.CreateEncryptionInteractionListener {
     //TODO: Create simple Encryption Mechanism that will shuffle a gene and allow for creating an encrypted message to be put back into decryption machine
 
     @Override
@@ -46,6 +47,11 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        //TODO: This will change.
     }
 
     /**

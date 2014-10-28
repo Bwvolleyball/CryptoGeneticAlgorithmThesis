@@ -13,7 +13,7 @@ import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CreateEncryption.OnFragmentInteractionListener} interface
+ * {@link CreateEncryption.CreateEncryptionInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CreateEncryption#newInstance} factory method to
  * create an instance of this fragment.
@@ -28,7 +28,7 @@ public class CreateEncryption extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private CreateEncryptionInteractionListener mListener;
 
     /**
      * Use this factory method to create a new instance of
@@ -79,7 +79,7 @@ public class CreateEncryption extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (CreateEncryptionInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -102,7 +102,7 @@ public class CreateEncryption extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface CreateEncryptionInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
