@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Encrypt Message"
-            android:id="@+id/encryptMessage"
+            android:id="@+id/encryptMessageBtn"
             android:layout_weight="2" />
 
         <Space
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Decrypt Message"
-            android:id="@+id/decryptMessage"
+            android:id="@+id/decryptMessageBtn"
             android:layout_weight="2" />
     </LinearLayout>
 </LinearLayout>

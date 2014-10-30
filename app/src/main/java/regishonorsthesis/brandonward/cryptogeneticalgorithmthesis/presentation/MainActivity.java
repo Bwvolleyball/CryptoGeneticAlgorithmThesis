@@ -1,8 +1,9 @@
 package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.presentation;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,13 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
+import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.EncryptionManager;
 
-public class MainActivity extends Activity implements CreateEncryption.CreateEncryptionInteractionListener {
+public class MainActivity extends Activity implements CreateEncryptionFragment.CreateEncryptionInteractionListener, MainFragment.MainFragmentInteractionListener {
     //TODO: Create simple Encryption Mechanism that will shuffle a gene and allow for creating an encrypted message to be put back into decryption machine
 
+    private String VISIBLE_FRAGMENT_TAG;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +52,30 @@ public class MainActivity extends Activity implements CreateEncryption.CreateEnc
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-        //TODO: This will change.
+    public void onEncryptButtonInteraction(View view, String msg) {
+        //TODO: This is from the encryption menu, when the user wants to encrypt their message.
+        EncryptionManager mgr = new EncryptionManager();
+        String encryption = mgr.Encrypt(msg);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment newFragment = new CreateEncryptionFragment().newInstance(msg, encryption);
+        VISIBLE_FRAGMENT_TAG = newFragment.toString();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, newFragment, VISIBLE_FRAGMENT_TAG)
+                .setTransition(FragmentTransaction.TRANSIT_NONE)
+                .commit();
+
+    }
+
+    @Override
+    public void onEncryptInteraction(View view) {
+        //TODO: Change View to Encryption Menu -> This should work, need to test on phone.
+        getFragmentManager().beginTransaction().add(R.id.container, getFragmentManager().findFragmentById(R.layout.fragment_create_encryption)).commit();
+    }
+
+    @Override
+    public void onDecryptInteraction(View view) {
+        //TODO: Change View to Decryption Menu
     }
 
     /**
@@ -68,5 +92,6 @@ public class MainActivity extends Activity implements CreateEncryption.CreateEnc
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
+
     }
 }
