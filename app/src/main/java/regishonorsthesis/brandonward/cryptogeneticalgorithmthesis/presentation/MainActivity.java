@@ -23,12 +23,9 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, getFragmentManager().findFragmentById(R.layout.fragment_main))//On create, launch the app with the main fragment
+                    .replace(R.id.container, MainFragment.newInstance())//On create, launch the app with the main fragment
                     .commit();
-        }
     }
 
 
