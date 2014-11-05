@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/messageTxt"
             android:minHeight="70dp"
-            android:editable="true" />
+            android:editable="true"
+            android:selectAllOnFocus="true" />
     </ScrollView>
 
     <Space

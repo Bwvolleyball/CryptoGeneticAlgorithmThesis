@@ -67,7 +67,7 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
     @Override
     public void onEncryptInteraction() {
         //TODO: Change View to Encryption Menu -> This should work, need to test on phone.
-        getFragmentManager().beginTransaction().replace(R.id.container, CreateEncryptionFragment.newInstance("", "")).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, CreateEncryptionFragment.newInstance("enter message to be encrypted", "")).commit();
     }
 
     @Override

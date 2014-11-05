@@ -35,7 +35,7 @@ public class EncryptionManager {
         char[] encryptGene = RandomEncryption();
         char[] charMsg = msg.toCharArray();
         for (int i = 0; i < charMsg.length; i++) {
-            if (charMsg[i] != ' ') {
+            if ((int) charMsg[i] - (int) 'a' >= 0 && (int) charMsg[i] - (int) 'a' < 26) {
                 charMsg[i] = encryptGene[(((int) ((char) charMsg[i])) - (int) ((char) 'a'))];//Change each part of charMsg to the shuffled letter in encryptGene.
             }
         }
