@@ -35,8 +35,8 @@ public class MainFragment extends Fragment {
      * @return A new instance of fragment CreateEncryptionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CreateEncryptionFragment newInstance() {
-        CreateEncryptionFragment fragment = new CreateEncryptionFragment();
+    public static MainFragment newInstance() {
+        MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -66,29 +66,29 @@ public class MainFragment extends Fragment {
         encrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onEncryptPressed(v);
+                onEncryptPressed();
             }
         });
         Button decrypt = (Button) view.findViewById(R.id.decryptMessageBtn);
         decrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDecryptPressed(v);
+                onDecryptPressed();
             }
         });
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onEncryptPressed(View view) {
+    public void onEncryptPressed() {
         if (mListener != null) {
-            mListener.onEncryptInteraction(view);
+            mListener.onEncryptInteraction();
         }
     }
 
-    public void onDecryptPressed(View view) {
+    public void onDecryptPressed() {
         if (mListener != null) {
-            mListener.onDecryptInteraction(view);
+            mListener.onDecryptInteraction();
         }
     }
 
@@ -121,9 +121,9 @@ public class MainFragment extends Fragment {
      */
     public interface MainFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onEncryptInteraction(View view);
+        public void onEncryptInteraction();
 
-        public void onDecryptInteraction(View view);
+        public void onDecryptInteraction();
     }
 
 }

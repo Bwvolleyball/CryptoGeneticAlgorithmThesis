@@ -72,7 +72,7 @@ public class CreateEncryptionFragment extends Fragment {
         encrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onEncryptButtonPressed(v);
+                onEncryptButtonPressed();
             }
         });
         if (message != null) {
@@ -87,10 +87,10 @@ public class CreateEncryptionFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onEncryptButtonPressed(View view) {
+    public void onEncryptButtonPressed() {
         if (mListener != null) {
-            String msg = ((EditText) view.findViewById(R.id.messageTxt)).getText().toString();
-            mListener.onEncryptButtonInteraction(view, msg);
+            String msg = ((EditText) getView().findViewById(R.id.messageTxt)).getText().toString();
+            mListener.onEncryptButtonInteraction(msg);
         }
     }
 
@@ -123,7 +123,7 @@ public class CreateEncryptionFragment extends Fragment {
      */
     public interface CreateEncryptionInteractionListener {
         // TODO: Update argument type and name
-        public void onEncryptButtonInteraction(View view, String msg);
+        public void onEncryptButtonInteraction(String msg);
     }
 
 }

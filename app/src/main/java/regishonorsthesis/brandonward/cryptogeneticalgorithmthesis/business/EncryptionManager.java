@@ -15,7 +15,7 @@ public class EncryptionManager {
     private Encryption encryption;
 
     public EncryptionManager() {
-
+        encryption = new Encryption();
     }
 
     public EncryptionManager(String msg) {
@@ -35,7 +35,9 @@ public class EncryptionManager {
         char[] encryptGene = RandomEncryption();
         char[] charMsg = msg.toCharArray();
         for (int i = 0; i < charMsg.length; i++) {
-            charMsg[i] = encryptGene[((int) charMsg[i] - (int) 'a')];//Change each part of charMsg to the shuffled letter in encryptGene.
+            if (charMsg[i] != ' ') {
+                charMsg[i] = encryptGene[(((int) ((char) charMsg[i])) - (int) ((char) 'a'))];//Change each part of charMsg to the shuffled letter in encryptGene.
+            }
         }
         String encryption = String.copyValueOf(charMsg);
         this.encryption.setEncryption(encryption);

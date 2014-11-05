@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
     }
 
     @Override
-    public void onEncryptButtonInteraction(View view, String msg) {
+    public void onEncryptButtonInteraction(String msg) {
         //TODO: This is from the encryption menu, when the user wants to encrypt their message.
         EncryptionManager mgr = new EncryptionManager();
         String encryption = mgr.Encrypt(msg);
@@ -65,13 +65,13 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
     }
 
     @Override
-    public void onEncryptInteraction(View view) {
+    public void onEncryptInteraction() {
         //TODO: Change View to Encryption Menu -> This should work, need to test on phone.
-        getFragmentManager().beginTransaction().add(R.id.container, getFragmentManager().findFragmentById(R.layout.fragment_create_encryption)).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, CreateEncryptionFragment.newInstance("", "")).commit();
     }
 
     @Override
-    public void onDecryptInteraction(View view) {
+    public void onDecryptInteraction() {
         //TODO: Change View to Decryption Menu
     }
 
