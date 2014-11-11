@@ -16,7 +16,6 @@ import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.EncryptionManager;
 
 public class MainActivity extends Activity implements CreateEncryptionFragment.CreateEncryptionInteractionListener, MainFragment.MainFragmentInteractionListener, DecryptionFragment.OnDecryptionFragmentInteractionListener {
-    //TODO: Create simple Encryption Mechanism that will shuffle a gene and allow for creating an encrypted message to be put back into decryption machine
 
     private String VISIBLE_FRAGMENT_TAG;
     @Override
@@ -60,7 +59,7 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
 
     @Override
     public void onEncryptButtonInteraction(String msg) {
-        //TODO: This is from the encryption menu, when the user wants to encrypt their message.
+        //This is from the encryption menu, when the user wants to encrypt their message.
         EncryptionManager mgr = new EncryptionManager();
         String encryption = mgr.Encrypt(msg);
 
@@ -76,7 +75,7 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
 
     @Override
     public void onEncryptInteraction() {
-        //TODO: Change View to Encryption Menu -> This should work, need to test on phone.
+        //Change View to Encryption Menu
         Fragment newFragment = CreateEncryptionFragment.newInstance("enter message to be encrypted", "");
         FragmentManager mgr = getFragmentManager();
         mgr.beginTransaction().addToBackStack(VISIBLE_FRAGMENT_TAG).replace(R.id.container, newFragment).commit();
@@ -85,7 +84,7 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
 
     @Override
     public void onDecryptInteraction() {
-        //TODO: Change View to Decryption Menu
+        //Change View to Decryption Menu
         Fragment newFragment = DecryptionFragment.newInstance("paste encrypted message here", "");
         FragmentManager mgr = getFragmentManager();
         mgr.beginTransaction().addToBackStack(VISIBLE_FRAGMENT_TAG).replace(R.id.container, newFragment).commit();
@@ -94,7 +93,7 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
 
     @Override
     public void onDecryptPressed() {
-
+        //From Decryption Menu, this will decrypt the message
     }
 
     /**
