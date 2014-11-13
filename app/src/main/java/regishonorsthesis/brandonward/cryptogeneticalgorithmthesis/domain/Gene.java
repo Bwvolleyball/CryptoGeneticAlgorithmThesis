@@ -23,8 +23,9 @@ public class Gene extends DomainAbs {
         }
     }
 
-    public Gene(List<Character> gene) {
-        this.gene.addAll(gene);
+    public Gene(List<Character> nGene) {
+        gene = new ArrayList<Character>(26);
+        this.gene.addAll(nGene);
     }
 
     public List getGene() {

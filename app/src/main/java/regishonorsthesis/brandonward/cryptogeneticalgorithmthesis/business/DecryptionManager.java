@@ -1,6 +1,7 @@
 package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.domain.Ciphertext;
@@ -33,15 +34,35 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
     public DecryptionManager(Ciphertext cipher) {
         this.cipher = cipher;
         splitCipher = cipher.getCiphertext().toCharArray();
-        List<Character> list = new ArrayList<Character>(26);
-        for (int i = 97; i <= 122; i++) {
-            list.add((char) i);
-        }
-        Gene gene = new Gene(list);
-        decryption.setGene(gene);
+        initializeGene();
     }
 
-    public void nextDecryption() {
+    public DecryptionManager() {
+        initializeGene();
+    }
+
+    public DecryptionManager(String ciphertext) {
+        cipher.setCiphertext(ciphertext);
+        splitCipher = ciphertext.toCharArray();
+        initializeGene();
+    }
+
+    private void initializeGene() {
+        List<Character> list = new ArrayList<Character>(26);
+        for (int i = (int) 'a'; i <= (int) 'z'; i++) {
+            list.add((char) i);
+        }
+        Collections.shuffle(list);
+        Gene gene = new Gene(list);
+        decryption = new Decryption(gene);
+    }
+
+    public String decrypt(String encryption) {
+
+        return encryption;
+    }
+
+    private void nextDecryption() {
         double prevFitness = decryption.getFitness();//Save previous fitness and decryption
         Decryption prevDecrypt = decryption;//Test after changing decryption to see if new iteration should be kept
         decryption = newDecryption();
@@ -50,7 +71,7 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         //TODO: calculate which positions need to be locked
     }
 
-    public Decryption newDecryption() {
+    private Decryption newDecryption() {
         //Split into arrays of kept and unkept bits
         List<Character> shuffle = decryption.getGene().getGene();
         int j = 0;//track index of lock
@@ -74,7 +95,7 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         return null;
     }
 
-    public void calculateFitness() {
+    private void calculateFitness() {
         decryption.setFitness(calculateSingleFit()
                 + calculateDigraphFit()
                 + calculateTrigraphFit()

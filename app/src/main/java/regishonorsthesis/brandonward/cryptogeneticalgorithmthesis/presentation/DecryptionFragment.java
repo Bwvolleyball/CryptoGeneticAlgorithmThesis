@@ -7,6 +7,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
 
@@ -64,14 +66,32 @@ public class DecryptionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_decryption, container, false);
+        Button decryptButton = (Button) view.findViewById(R.id.decryptBtn);
+        EditText encryption = (EditText) view.findViewById(R.id.encryptedDecrptTxt);
+        EditText decryption = (EditText) view.findViewById(R.id.decryptedMessageTxt);
+        if (cipher != null) {
+            encryption.setText(cipher);
+        }
+        if (message != null) {
+            decryption.setText(message);
+        }
+        decryptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDecryptButtonPressed();
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_decryption, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onDecryptButtonPressed() {
         if (mListener != null) {
-            mListener.onDecryptPressed();
+            String encryption = ((EditText) getView().findViewById(R.id.encryptedDecrptTxt)).getText().toString();
+            mListener.onDecryptPressed(encryption);
         }
     }
 
@@ -104,7 +124,7 @@ public class DecryptionFragment extends Fragment {
      */
     public interface OnDecryptionFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onDecryptPressed();
+        public void onDecryptPressed(String encryption);
     }
 
 }

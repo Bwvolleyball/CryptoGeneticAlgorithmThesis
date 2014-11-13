@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
+import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.DecryptionManager;
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.EncryptionManager;
 
 public class MainActivity extends Activity implements CreateEncryptionFragment.CreateEncryptionInteractionListener, MainFragment.MainFragmentInteractionListener, DecryptionFragment.OnDecryptionFragmentInteractionListener {
@@ -92,8 +93,19 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
     }
 
     @Override
-    public void onDecryptPressed() {
+    public void onDecryptPressed(String encryption) {
         //From Decryption Menu, this will decrypt the message
+        DecryptionManager mgr = new DecryptionManager();
+        String decryption = mgr.decrypt(encryption);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment newFragment = new DecryptionFragment().newInstance(encryption, decryption);
+        VISIBLE_FRAGMENT_TAG = newFragment.toString();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, newFragment, VISIBLE_FRAGMENT_TAG)
+                .setTransition(FragmentTransaction.TRANSIT_NONE)
+                .commit();
+
     }
 
     /**
