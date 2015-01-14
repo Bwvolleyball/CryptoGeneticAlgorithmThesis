@@ -1,7 +1,6 @@
 package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.domain.Ciphertext;
@@ -42,6 +41,9 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
     }
 
     public DecryptionManager(String ciphertext) {
+        if (cipher == null) {
+            cipher = new Ciphertext();
+        }
         cipher.setCiphertext(ciphertext);
         splitCipher = ciphertext.toCharArray();
         initializeGene();
@@ -52,14 +54,62 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         for (int i = (int) 'a'; i <= (int) 'z'; i++) {
             list.add((char) i);
         }
-        Collections.shuffle(list);
+        //Collections.shuffle(list);
         Gene gene = new Gene(list);
         decryption = new Decryption(gene);
     }
 
     public String decrypt(String encryption) {
-
+        frequencyGuess(encryption);
         return encryption;
+    }
+
+    private String frequencyGuess(String encryption) {
+        guessTrigraphs("the", encryption);
+        return null;
+    }
+
+    private void guessTrigraphs(String trigraph, String encryption) {//This function will manipulate the gene, which started as trivial (a-a, b-b... z-z)
+        char[] letters = trigraph.toCharArray();
+        char[] message = encryption.toCharArray();
+        List<Character[]> trigraphs = new ArrayList<Character[]>();
+        List<Integer> triCount = new ArrayList<Integer>();
+        for (int i = 0; i < (message.length - letters.length); i++) {
+            Character[] temp = new Character[3];
+            if (message[i] != ' ' || message[i + 1] != ' ' || message[i + 2] != ' ') {
+                temp[1] = message[i];
+                temp[2] = message[i + 1];
+                temp[3] = message[i + 2];
+                if (!(trigraphs.contains(temp))) {
+                    trigraphs.add(temp);
+                    triCount.add(1);
+                } else {//trigraphs.contains(temp)
+                    int index = trigraphs.indexOf(temp);
+                    triCount.add(index, triCount.get(index) + 1);
+                }
+            }
+        }//After this for loop, the letters passed in should be the char[] with the highest combo
+        int highIndex = 0;//TODO: This won't quite work, needs to be tweaked so that it works for all trigraphs, maybe pass in number of commonness?
+        for (int i = 0; i < triCount.size(); i++) {
+            int high = 0;
+            int temp = triCount.get(i);
+            if (temp > high) {
+                high = temp;
+                highIndex = i;
+            }
+        }
+        Character[] switching = trigraphs.get(highIndex);
+        List<Character> gene = decryption.getGene().getGene();
+        for (int i = 0; i < switching.length; i++) {
+            int indexLetters = gene.indexOf(letters[i]);
+            int indexSwitching = gene.indexOf(switching[i]);
+            char lettersChar = gene.get(indexLetters);
+            char switchingChar = gene.get(indexSwitching);
+            gene.add(indexLetters, switchingChar);
+            gene.add(indexSwitching, lettersChar);
+            locked[indexSwitching] = true;
+        }
+        decryption.getGene().setGene(gene);
     }
 
     private void nextDecryption() {
