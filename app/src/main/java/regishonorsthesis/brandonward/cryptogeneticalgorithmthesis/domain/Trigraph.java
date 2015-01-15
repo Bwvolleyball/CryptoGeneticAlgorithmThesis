@@ -9,19 +9,12 @@ public class Trigraph {
     private int count;
 
     public Trigraph() {
-        trigraph = new Character[3];
+        setTrigraph(new Character[3]);
         setCount(0);
     }
 
     public Character[] getTrigraph() {
         return trigraph;
-    }
-
-    public void setTrigraph(String trigraph) {
-        char[] temp = trigraph.toCharArray();
-        this.trigraph[0] = temp[0];
-        this.trigraph[1] = temp[1];
-        this.trigraph[2] = temp[2];
     }
 
     public int getCount() {
@@ -30,5 +23,30 @@ public class Trigraph {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public void setTrigraph(Character[] trigraph) {
+        this.trigraph = trigraph;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Trigraph)) {
+            return false;
+        }
+        Trigraph trigraph = (Trigraph) obj;
+        if (this.trigraph[0] != trigraph.trigraph[0]) {
+            return false;
+        }
+        if (this.trigraph[1] != trigraph.trigraph[1]) {
+            return false;
+        }
+        if (this.trigraph[2] != trigraph.trigraph[2]) {
+            return false;
+        }
+        return true;
     }
 }
