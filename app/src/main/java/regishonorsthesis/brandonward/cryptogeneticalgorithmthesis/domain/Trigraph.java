@@ -9,7 +9,7 @@ public class Trigraph {
     private int count;
 
     public Trigraph() {
-        setTrigraph(new Character[3]);
+        trigraph = new Character[3];
         setCount(0);
     }
 
@@ -17,8 +17,11 @@ public class Trigraph {
         return trigraph;
     }
 
-    public void setTrigraph(Character[] trigraph) {
-        this.trigraph = trigraph;
+    public void setTrigraph(String trigraph) {
+        char[] temp = trigraph.toCharArray();
+        this.trigraph[0] = temp[0];
+        this.trigraph[1] = temp[1];
+        this.trigraph[2] = temp[2];
     }
 
     public int getCount() {

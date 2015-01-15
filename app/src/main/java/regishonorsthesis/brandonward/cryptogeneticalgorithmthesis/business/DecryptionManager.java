@@ -65,11 +65,14 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
 
     public String decrypt(String encryption) {
         frequencyGuess(encryption);
+        //TODO: Apply gene to decryption
+        executeDecryption(encryption);
         return encryption;
     }
 
     private String frequencyGuess(String encryption) {
         List<Trigraph> triCount = trigraphFrequencies(encryption);
+        triAdjust(triCount, "the".toCharArray(), 1);
         return null;
     }
 
@@ -80,13 +83,13 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         for (int i = 0; i < (message.length - 3); i++) {
             Character[] temp = new Character[3];
             if (message[i] != ' ' || message[i + 1] != ' ' || message[i + 2] != ' ') {
-                temp[1] = message[i];
-                temp[2] = message[i + 1];
-                temp[3] = message[i + 2];
+                temp[0] = message[i];
+                temp[1] = message[i + 1];
+                temp[2] = message[i + 2];
                 if (!(trigraphs.contains(temp))) {
                     trigraphs.add(temp);
                     Trigraph trigraph = new Trigraph();
-                    trigraph.setTrigraph(temp);
+                    trigraph.setTrigraph(temp.toString());
                     trigraph.setCount(1);
                 } else {//trigraphs.contains(temp)
                     Iterator<Trigraph> iter = triCount.iterator();
@@ -111,31 +114,41 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
                 return -1;//TODO: I may need to flip this accordingly.
             }
         });//After this for loop, the letters passed in should be the char[] with the highest combo
-        return triCount;
+        return triCount;//TODO: Somthing is broken here with this list.
     }
 
     public void triAdjust(List<Trigraph> trigraphs, char[] trigraph, int index) {
-//        int highIndex = 0;//TODO: Make this load the trigraph from list, switch it with passed trigraph, and lock in switched ones.
-//        for (int i = 0; i < triCount.size(); i++) {
-//            int high = 0;
-//            int temp = triCount.get(i);
-//            if (temp > high) {
-//                high = temp;
-//                highIndex = i;
-//            }
-//        }
-//        Character[] switching = trigraphs.get(highIndex);
-//        List<Character> gene = decryption.getGene().getGene();
-//        for (int i = 0; i < switching.length; i++) {
-//            int indexLetters = gene.indexOf(letters[i]);
-//            int indexSwitching = gene.indexOf(switching[i]);
-//            char lettersChar = gene.get(indexLetters);
-//            char switchingChar = gene.get(indexSwitching);
-//            gene.add(indexLetters, switchingChar);
-//            gene.add(indexSwitching, lettersChar);
-//            locked[indexSwitching] = true;
-//        }
-//        decryption.getGene().setGene(gene);
+        //TODO: Make this load the trigraph from list, switch it with passed trigraph, and lock in switched ones.
+        Character[] switching = new Character[3];
+        switching = trigraphs.get(index).getTrigraph();
+        List<Character> gene = decryption.getGene().getGene();
+        for (int i = 0; i < switching.length; i++) {
+            int indexLetters = gene.indexOf(trigraph[i]);
+            int indexSwitching = gene.indexOf(switching[i]);
+            char lettersChar = gene.get(indexLetters);
+            char switchingChar = gene.get(indexSwitching);
+            gene.add(indexLetters, switchingChar);
+            gene.add(indexSwitching, lettersChar);
+            locked[indexSwitching] = true;
+        }
+        decryption.getGene().setGene(gene);
+    }
+
+    private String executeDecryption(String encryption) {
+        List<Character> gene = decryption.getGene().getGene();
+        char[] toDecrypt = encryption.toCharArray();
+        Iterator<Character> iter = gene.iterator();
+        char character = 'a';
+        while (iter.hasNext()) {
+            Character next = iter.next();
+            for (int i = 0; i < toDecrypt.length; i++) {
+                if (toDecrypt[i] == character) {
+                    toDecrypt[i] = next;
+                }
+            }
+            character = character++;
+        }
+        return toDecrypt.toString();
     }
 
     private void nextDecryption() {
