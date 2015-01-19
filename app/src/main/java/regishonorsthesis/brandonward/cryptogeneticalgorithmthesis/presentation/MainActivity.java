@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,9 +52,6 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (VISIBLE_FRAGMENT_TAG != null) {
-            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentByTag(VISIBLE_FRAGMENT_TAG)).commit();
-        }
     }
 
     @Override
@@ -66,8 +62,9 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
 
         FragmentManager fragmentManager = getFragmentManager();
         Fragment newFragment = new CreateEncryptionFragment().newInstance(msg, encryption);
-        VISIBLE_FRAGMENT_TAG = newFragment.toString();
-        fragmentManager.beginTransaction()
+        //VISIBLE_FRAGMENT_TAG = newFragment.toString();
+        fragmentManager.popBackStack();
+        fragmentManager.beginTransaction().addToBackStack(VISIBLE_FRAGMENT_TAG)
                 .replace(R.id.container, newFragment, VISIBLE_FRAGMENT_TAG)
                 .setTransition(FragmentTransaction.TRANSIT_NONE)
                 .commit();
@@ -100,8 +97,9 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
 
         FragmentManager fragmentManager = getFragmentManager();
         Fragment newFragment = new DecryptionFragment().newInstance(encryption, decryption);
-        VISIBLE_FRAGMENT_TAG = newFragment.toString();
-        fragmentManager.beginTransaction()
+        //VISIBLE_FRAGMENT_TAG = newFragment.toString();
+        fragmentManager.popBackStack();
+        fragmentManager.beginTransaction().addToBackStack(VISIBLE_FRAGMENT_TAG)
                 .replace(R.id.container, newFragment, VISIBLE_FRAGMENT_TAG)
                 .setTransition(FragmentTransaction.TRANSIT_NONE)
                 .commit();

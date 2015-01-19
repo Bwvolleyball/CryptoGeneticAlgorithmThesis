@@ -137,12 +137,17 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         for (int i = 0; i < switching.length; i++) {
             int indexLetters = gene.indexOf(trigraph[i]);
             int indexSwitching = gene.indexOf(switching[i]);
-            if (!locked[indexLetters]) {
+            if (!(locked[indexSwitching] == false && locked[indexLetters] == true)) {
                 char lettersChar = gene.get(indexLetters);
                 char switchingChar = gene.get(indexSwitching);
                 gene.set(indexLetters, switchingChar);
                 gene.set(indexSwitching, lettersChar);
                 locked[indexLetters] = true;
+            } else {
+                char temp = gene.get(trigraph[i] - 'a');
+                gene.set(trigraph[i] - 'a', switching[i]);
+                gene.set(indexSwitching, temp);
+                locked[trigraph[i] - 'a'] = true;
             }
         }
         decryption.getGene().setGene(gene);
@@ -152,10 +157,11 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         List<Character> gene = decryption.getGene().getGene();
         char[] toDecrypt = encryption.toCharArray();
         for (int i = 0; i < toDecrypt.length; i++) {
-            if (toDecrypt[i] != ' ') {
+            if (toDecrypt[i] >= 'a' && toDecrypt[i] <= 'z') {
                 toDecrypt[i] = (char) ('a' + (char) gene.indexOf(toDecrypt[i]));
             }
         }
+        initializeGene();//TODO: This could mess it up more?
         return String.copyValueOf(toDecrypt);
     }
 
