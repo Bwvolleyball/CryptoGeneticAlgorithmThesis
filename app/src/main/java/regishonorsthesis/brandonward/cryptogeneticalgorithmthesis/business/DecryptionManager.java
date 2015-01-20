@@ -79,6 +79,8 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         encryption = executeDecryption(encryption);
         triAdjust(trigraphFrequencies(encryption), "ing".toCharArray(), 2);
         encryption = executeDecryption(encryption);
+        triAdjust(trigraphFrequencies(encryption), "her".toCharArray(), 3);
+        encryption = executeDecryption(encryption);
         return encryption;
     }
 
