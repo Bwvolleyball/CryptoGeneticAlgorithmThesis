@@ -45,21 +45,21 @@
         android:layout_weight="1">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
             android:text="Encrypt Message"
             android:id="@+id/encryptMessageBtn"
-            android:layout_weight="2" />
+            android:background="@drawable/redbtn" />
 
         <Space
             android:layout_width="15dp"
             android:layout_height="match_parent" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
             android:text="Decrypt Message"
             android:id="@+id/decryptMessageBtn"
-            android:layout_weight="2" />
+            android:background="@drawable/redbtn" />
     </LinearLayout>
 </LinearLayout>

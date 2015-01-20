@@ -87,7 +87,6 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         List<Trigraph> triCount = new LinkedList<Trigraph>();
         for (int i = 0; i < (message.length - 3); i++) {
             if (!(message[i] == ' ' || message[i + 1] == ' ' || message[i + 2] == ' ')) {
-                Character[] characters = new Character[3];
                 Trigraph trigraphn = new Trigraph();
                 Character[] temp = new Character[3];
                 temp[0] = message[i];

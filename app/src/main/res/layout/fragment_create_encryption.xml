@@ -1,84 +1,94 @@
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/encryptionHousing"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="right"
+    android:fillViewport="false">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Paste Message Here:"
-        android:id="@+id/messageTitle"
-        android:paddingLeft="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_gravity="center_horizontal" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/messageScroller"
-        android:paddingTop="10dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fillViewport="false">
-
-        <EditText
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/messageTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/messageTxt"
-            android:minHeight="70dp"
-            android:editable="true"
-            android:selectAllOnFocus="true" />
-    </ScrollView>
+            android:paddingLeft="10dp"
+            android:text="Paste Message Here:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Encrypt Message"
-        android:id="@+id/encryptBtn"
-        android:layout_gravity="center_horizontal" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Generated Encryption:"
-        android:id="@+id/encryptionTitle"
-        android:paddingLeft="15dp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/encryptionScroller"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fillViewport="false">
-
-        <EditText
-            android:layout_width="fill_parent"
+        <ScrollView
+            android:id="@+id/messageScroller"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/encryptTxt"
-            android:textIsSelectable="true"
-            android:selectAllOnFocus="true" />
-    </ScrollView>
-</LinearLayout>
+            android:fillViewport="false"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <EditText
+                android:id="@+id/messageTxt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:editable="true"
+                android:minHeight="70dp"
+                android:selectAllOnFocus="true" />
+        </ScrollView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/encryptBtn"
+            android:layout_width="176dp"
+            android:layout_height="78dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/redbtn"
+            android:text="Encrypt Message" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/encryptionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="Generated Encryption:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <ScrollView
+            android:id="@+id/encryptionScroller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:fillViewport="false"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <EditText
+                android:id="@+id/encryptTxt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:selectAllOnFocus="true"
+                android:textIsSelectable="true" />
+        </ScrollView>
+
+
+    </LinearLayout>
+</ScrollView>
