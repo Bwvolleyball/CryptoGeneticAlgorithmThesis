@@ -16,7 +16,7 @@ import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.domain.Trigrap
 /**
  * Created by BrandonWard on 10/13/2014.
  */
-public class DecryptionManager {//The Manager needs to keep track of the Ciphertext and the Decryption.
+public class DecryptionManagerTrigraph implements IDecryptionMgr {//The Manager needs to keep track of the Ciphertext and the Decryption.
     //TODO: The Manager needs fitness criteria, determine some composite fitness score
 
     private Ciphertext cipher;
@@ -35,17 +35,17 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
     private String[] commonWordEnds = {"e", "s", "d", "t", "n", "y", "r", "o", "l", "f"};
     private double[] commonWordEndsFrequencies = {0.192, 0.144, 0.092, 0.086, 0.079, 0.073, 0.069, 0.047, 0.046, 0.041};
 
-    public DecryptionManager(Ciphertext cipher) {
+    public DecryptionManagerTrigraph(Ciphertext cipher) {
         this.cipher = cipher;
         splitCipher = cipher.getCiphertext().toCharArray();
         initializeGene();
     }
 
-    public DecryptionManager() {
+    public DecryptionManagerTrigraph() {
         initializeGene();
     }
 
-    public DecryptionManager(String ciphertext) {
+    public DecryptionManagerTrigraph(String ciphertext) {
         if (cipher == null) {
             cipher = new Ciphertext();
         }
@@ -64,6 +64,7 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         decryption = new Decryption(gene);
     }
 
+    @Override
     public String decrypt(String encryption) {
         encryption = frequencyGuess(encryption);
         //TODO: Apply gene to decryption
@@ -127,7 +128,7 @@ public class DecryptionManager {//The Manager needs to keep track of the Ciphert
         return triCount;
     }
 
-    public void triAdjust(List<Trigraph> trigraphs, char[] trigraph, int index) {
+    private void triAdjust(List<Trigraph> trigraphs, char[] trigraph, int index) {
         //TODO: Make this load the trigraph from list, switch it with passed trigraph, and lock in switched ones.
         if (trigraphs.size() <= index) {
             return;//Meaning that the index would be out of the index, and therefore not allowed, so do nothing.
