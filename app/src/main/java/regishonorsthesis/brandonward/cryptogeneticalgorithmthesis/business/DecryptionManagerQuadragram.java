@@ -16,7 +16,7 @@ import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
  */
 public class DecryptionManagerQuadragram implements IDecryptionMgr {
 
-    private Map<String, Integer> quadragrams;
+    private Map<Integer, Integer> quadragrams;
     private Context context;
 
     public DecryptionManagerQuadragram(Context context) {
@@ -25,7 +25,7 @@ public class DecryptionManagerQuadragram implements IDecryptionMgr {
     }
 
     private void init() {
-        quadragrams = new HashMap<String, Integer>();
+        quadragrams = new HashMap<Integer, Integer>();
         LoadFile(R.raw.englishquadgrams);
     }
 
@@ -40,7 +40,7 @@ public class DecryptionManagerQuadragram implements IDecryptionMgr {
             while ((readLine = br.readLine()) != null) {
                 readLine = readLine.toUpperCase();
                 String[] result = readLine.split(" ");
-                String key = result[0];
+                int key = result[0].hashCode();
                 int score = Integer.parseInt(result[1]);
                 quadragrams.put(key, score);
                 //Log.d("TEXT", readLine);
