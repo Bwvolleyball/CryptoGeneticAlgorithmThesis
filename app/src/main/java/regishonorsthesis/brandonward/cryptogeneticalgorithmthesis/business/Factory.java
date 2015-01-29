@@ -1,6 +1,8 @@
 package regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business;
 
-import java.io.FileInputStream;
+import android.util.Log;
+
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -14,15 +16,16 @@ public class Factory {
             Class c = Class.forName(getImplName(name));
             return (IMgr) c.newInstance();
         } catch (Exception e) {
+            Log.e("Factory", "Fatal error in Factory" + e.getMessage());
             throw new BusinessException("Factory Exception: " + e.getMessage());
         }
     }
 
     private String getImplName(String name) throws Exception {
-        FileInputStream fis = new FileInputStream("Factory.properties");
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("Factory.properties");
         Properties props = new Properties();
-        props.load(fis);
-        fis.close();
+        props.load(is);
+        is.close();
         return props.getProperty(name);
     }
 }

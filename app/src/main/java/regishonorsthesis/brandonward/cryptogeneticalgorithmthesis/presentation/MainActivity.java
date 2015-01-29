@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.R;
-import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.BusinessException;
+import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.DecryptionManagerQuadragram;
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.EncryptionManager;
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.Factory;
 import regishonorsthesis.brandonward.cryptogeneticalgorithmthesis.business.IDecryptionMgr;
@@ -96,15 +95,8 @@ public class MainActivity extends Activity implements CreateEncryptionFragment.C
     public void onDecryptPressed(String encryption) {
         //From Decryption Menu, this will decrypt the message
         Factory factory = new Factory();
-        IDecryptionMgr mgr = null;
-        try {
-            mgr = (IDecryptionMgr) factory.getManager(IDecryptionMgr.CLASS_NAME);
-            //TODO: The Factory isn't quite working on this, need to find out how to use Properties files in Android
-        } catch (BusinessException e) {
-            Log.e("MainActivity.java", e.getMessage());
-        }
+        IDecryptionMgr mgr = new DecryptionManagerQuadragram(getApplicationContext());
         String decryption = mgr.decrypt(encryption);
-
         FragmentManager fragmentManager = getFragmentManager();
         Fragment newFragment = new DecryptionFragment().newInstance(encryption, decryption);
         //VISIBLE_FRAGMENT_TAG = newFragment.toString();
